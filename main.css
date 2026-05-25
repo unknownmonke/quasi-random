@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('./fonts/HelveticaNeue.otf') format('otf');
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 50px 0;
+}
+
+.title {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 1.125rem;
+    color: #4d4d4d;
+    margin-bottom: 16px;
+}
+
+.preview-container {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.preview {
+    height: 50px;
+    width: 100px;
+    border: 1px solid #dfe1e6;
+    border-radius: 4px;
+    pointer-events: none;
+}

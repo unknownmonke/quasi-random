@@ -1,5 +1,7 @@
 'use strict';
 
+const N_RGB = 100;
+
 function phi(d) {
     let x = 2.0000;
 
@@ -67,4 +69,16 @@ function generate_from_pool(pool, r) {
         values[k] = pool[index];
     }
     return values;
+}
+
+function to_rgb(list) {
+    return list.map(values => 
+        values.map(val => Math.round(val * 255))
+    );
+}
+
+const values = to_rgb(generate_from_pool(generate(3, N_RGB), 10));
+
+for(let l = 0; l < values.length; l++) {
+    document.getElementById(l + 1).style.background = `rgb(${values[l][0]}, ${values[l][1]}, ${values[l][2]})`;
 }
