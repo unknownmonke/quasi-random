@@ -19,6 +19,26 @@
     margin-bottom: 16px;
 }
 
+input {
+    width: 48px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid #bbbfc5;
+    border-radius: 4px;
+    color: #4d4d4d;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    font-family: inherit;
+    transition: all 175ms ease-out;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #bbbfc5;
+    box-shadow: 0 0 0px 1.5px #bbbfc5;
+}
+
 .preview-container {
     display: inline-flex;
     justify-content: center;
@@ -33,4 +53,14 @@
     border: 1px solid #dfe1e6;
     border-radius: 4px;
     pointer-events: none;
+}
+
+.chart-container {
+    position: relative;
+    height: 500px;
+}
+
+#distribution-graph {
+  max-width: 500px;
+  height: 100%;
 }

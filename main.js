@@ -82,3 +82,83 @@ const values = to_rgb(generate_from_pool(generate(3, N_RGB), 10));
 for(let l = 0; l < values.length; l++) {
     document.getElementById(l + 1).style.background = `rgb(${values[l][0]}, ${values[l][1]}, ${values[l][2]})`;
 }
+
+
+// -------------------------------------------------------- //
+//                     Graph generation                     //
+// -------------------------------------------------------- //
+
+// Plots N generated values on a graph using Chart.js library.
+
+// Custom graph borders plugin.
+const chartAreaBorder = {
+    id: 'chartAreaBorder',
+    beforeDraw(chart, args, options) {
+        const { ctx, chartArea: { left, top, width, height }} = chart;
+
+        ctx.save();
+        ctx.strokeStyle = options.borderColor || '#000';
+        ctx.lineWidth = options.borderWidth || 2;
+
+        ctx.strokeRect(left, top, width, height);
+        ctx.restore();
+    }
+};
+
+const chart = new Chart("distribution-graph", {
+    type: "scatter",
+    data: {
+        datasets: [{
+            pointRadius: 4,
+            data: []
+        }]
+    },
+    options: {
+        maintainAspectRatio: false,
+        events: [],
+        plugins: {
+            legend: {
+                display: false
+            },
+            chartAreaBorder: {
+                borderColor: '#929292',
+                borderWidth: 1
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    },
+    plugins: [chartAreaBorder]
+});
+
+function updateGraph(graph_input, chart) {
+    const n_graph = parseInt(graph_input.value);
+
+    const values2d = generate(2, n_graph);
+    const points = [];
+
+    for (let i = 0; i < values2d.length; i++) {
+        points.push({x: values2d[i][0], y: values2d[i][1]});
+    }
+    
+    chart.data.datasets[0].data = points;
+    chart.update();
+}
+
+const graph_input = document.getElementById("graph-input");
+
+graph_input.addEventListener("input", () => {
+    const points = updateGraph(graph_input, chart);
+});
+
+const points = updateGraph(graph_input, chart);
