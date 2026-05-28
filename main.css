@@ -3,6 +3,21 @@
     src: url('./fonts/HelveticaNeue.otf') format('otf');
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #4d4d4d;
+}
+
+body {
+    background: #fff;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -13,18 +28,16 @@
 }
 
 .title {
-    font-family: 'Helvetica Neue', sans-serif;
     font-size: 1.125rem;
-    color: #4d4d4d;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 input {
-    width: 48px;
+    width: 54px;
     height: 32px;
     padding: 0 8px;
     border: 1px solid #bbbfc5;
-    border-radius: 4px;
+    border-radius: 4px; 
     color: #4d4d4d;
     font-weight: 600;
     font-size: 1rem;
@@ -40,19 +53,19 @@ input:focus {
 }
 
 .preview-container {
-    display: inline-flex;
-    justify-content: center;
-    width: 100%;
+    display: flex;
     flex-wrap: wrap;
+    width: 70vw;
+    justify-content: center;
     gap: 16px;
 }
 
 .preview {
     height: 50px;
-    width: 100px;
-    border: 1px solid #dfe1e6;
+    box-shadow: 0 1px 3px #dfe1e6;
     border-radius: 4px;
     pointer-events: none;
+    flex: 0 1 50px;
 }
 
 .chart-container {
