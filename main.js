@@ -6,74 +6,6 @@ const MAX_GRAPH = 1000;
 const RGB_POOL_SIZE = 10000; // Number of points to pre-generate in the value pool.
 
 // -------------------------------------------------------- //
-//                         Generator                        //
-// -------------------------------------------------------- //
-
-function phi(d) {
-    let x = 2.0000;
-
-    for (let i = 0; i < 10; i++) {
-        x = (1 + x) ** (1 / (d + 1));
-    }
-    return x;
-}
-
-/**
- * Generates a set of pseudo-random points in a d-dimensional space.
- * @param {int} dim - Number of dimensions.
- * @param {int} n - Number of points to generate.
- * @return {Array} - An array of n points, where each point is an array of dim values in the range [0, 1].
- */
-function generate(dim, n) {
-    /**
-     * This number can be any real number. But seed = 0.5 might be marginally better.
-     * Common default setting is typically seed = 0.
-     */
-    const seed = 0;
-
-    const list = [];
-    const g = phi(dim);
-
-    const alpha = [];
-    for (let i = 0; i < dim; i++) {
-        alpha[i] = (1 / g) ** (i + 1) % 1;
-    }
-
-    // Generating value pool.
-    for (let j = 0; j < n; j++) {
-        const nuple = [];
-
-        for (let h = 0; h < dim; h++) {
-            nuple[h] = (seed + alpha[h] * (j + 1)) % 1;
-        }
-        list[j] = nuple;
-    }
-    return list;
-}
-
-/**
- * Picks sample values from a pre-generated pool of points in a d-dimensional space. Fisher–Yates algorithm.
- * @param {Array} pool The pre-generated pool of points.
- * @param {int} r Number of sample points to return from the generated value pool.
- * @return {Array} An array of r points, where each point is an array of pool dimension values in the range [0, 1].
- */
-function sample_unique(pool, r) {
-
-    if (r > pool.length) {
-        throw new Error("Number of sample points to return cannot be greater than the number of generated points.");
-    }
-
-    const shuffled = pool.slice();
-    
-    for (let i = 0; i < r; i++) {
-        const j = i + Math.floor(Math.random() * (shuffled.length - i));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled.slice(0, r);
-}
-
-
-// -------------------------------------------------------- //
 //                      RGB generation                      //
 // -------------------------------------------------------- //
 
@@ -109,7 +41,6 @@ function update_rgb_preview(input, container, pool) {
         container.appendChild(node);
     });
 }
-
 
 // -------------------------------------------------------- //
 //                     Graph generation                     //
@@ -172,12 +103,11 @@ function update_graph(input, chart) {
     const n = validate_input(input.value, MAX_GRAPH);
     input.value = n;
 
-    const points = generate(2, n).map(([x, y]) => ({ x, y }));
+    const points = quasi_random(2, n).map(([x, y]) => ({ x, y }));
 
     chart.data.datasets[0].data = points;
     chart.update();
 }
-
 
 // -------------------------------------------------------- //
 //                        DOM actions                       //
@@ -186,7 +116,7 @@ function update_graph(input, chart) {
 document.addEventListener('DOMContentLoaded', () => {
 
     // Loads and caches RGB pool.
-    const rgb_pool = generate(3, RGB_POOL_SIZE);
+    const rgb_pool = quasi_random(3, RGB_POOL_SIZE);
 
     const rgb_input = document.getElementById("rgb-input");
     const graph_input = document.getElementById("graph-input");
