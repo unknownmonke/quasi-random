@@ -1,5 +1,8 @@
 'use strict';
 
+import Chart from 'chart.js/auto';
+import { quasi_random, sample_unique } from './src/quasi-random.js';
+
 const MAX_RGB = 100;
 const MAX_GRAPH = 1000;
 
