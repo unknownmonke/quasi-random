@@ -1,7 +1,7 @@
 'use strict';
 
 import Chart from 'chart.js/auto';
-import { quasi_random, sample_unique } from './src/quasi-random.js';
+import { quasiRandom, sampleUnique } from './src/quasi-random.js';
 
 const MAX_RGB = 100;
 const MAX_GRAPH = 1000;
@@ -16,7 +16,7 @@ const RGB_POOL_SIZE = 10000; // Number of points to pre-generate in the value po
  * Validates input value between [0, max].
  * Values outside of this range are set to the closest boundary value.
  */
-function validate_input(value, max) {
+function validateInput(value, max) {
     const number = Number.parseInt(value, 10);
 
     if (!Number.isInteger(number) || number < 0) {
@@ -25,15 +25,15 @@ function validate_input(value, max) {
     return Math.min(number, max);
 }
 
-function to_rgb(list) {
+function toRgb(list) {
     return list.map(values => values.map(val => Math.round(val * 255)));
 }
 
-function update_rgb_preview(input, container, pool) {
-    const n = validate_input(input.value, MAX_RGB);
+function updateRgbPreview(input, container, pool) {
+    const n = validateInput(input.value, MAX_RGB);
     input.value = n;
 
-    const colors = to_rgb(sample_unique(pool, n));
+    const colors = toRgb(sampleUnique(pool, n));
 
     container.innerHTML = "";
 
@@ -102,11 +102,11 @@ const chart = new Chart("distribution-graph", {
     plugins: [chartAreaBorder]
 });
 
-function update_graph(input, chart) {
-    const n = validate_input(input.value, MAX_GRAPH);
+function updateGraph(input, chart) {
+    const n = validateInput(input.value, MAX_GRAPH);
     input.value = n;
 
-    const points = quasi_random(2, n).map(([x, y]) => ({ x, y }));
+    const points = quasiRandom(2, n).map(([x, y]) => ({ x, y }));
 
     chart.data.datasets[0].data = points;
     chart.update();
@@ -119,15 +119,15 @@ function update_graph(input, chart) {
 document.addEventListener('DOMContentLoaded', () => {
 
     // Loads and caches RGB pool.
-    const rgb_pool = quasi_random(3, RGB_POOL_SIZE);
+    const rgbPool = quasiRandom(3, RGB_POOL_SIZE);
 
-    const rgb_input = document.getElementById("rgb-input");
-    const graph_input = document.getElementById("graph-input");
-    const preview_container = document.querySelector(".preview-container");
+    const rgbInput = document.getElementById("rgb-input");
+    const graphInput = document.getElementById("graph-input");
+    const previewContainer = document.querySelector(".preview-container");
 
-    rgb_input.addEventListener("input", () => update_rgb_preview(rgb_input, preview_container, rgb_pool));
-    graph_input.addEventListener("input", () => update_graph(graph_input, chart));
+    rgbInput.addEventListener("input", () => updateRgbPreview(rgbInput, previewContainer, rgbPool));
+    graphInput.addEventListener("input", () => updateGraph(graphInput, chart));
 
-    update_rgb_preview(rgb_input, preview_container, rgb_pool);
-    update_graph(graph_input, chart);
+    updateRgbPreview(rgbInput, previewContainer, rgbPool);
+    updateGraph(graphInput, chart);
 });

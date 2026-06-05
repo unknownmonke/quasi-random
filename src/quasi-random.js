@@ -25,7 +25,7 @@ function phi(d) {
  * @param {number} [seed=0] - Optional seed offset in range [0,1).
  * @returns {Array<number>} Array of n points, each an array of dim values in [0,1].
  */
-export function quasi_random(dim, n, seed = 0) {
+export function quasiRandom(dim, n, seed = 0) {
 
     if (!Number.isInteger(dim) || dim < 1) {
         throw new TypeError('dim must be a positive integer');
@@ -62,7 +62,7 @@ export function quasi_random(dim, n, seed = 0) {
  * @param {int} r - Number of sample points to return from the generated value pool.
  * @return {Array} An array of r points, where each point is an array of pool dimension values in the range [0, 1].
  */
-export function sample_unique(pool, r) {
+export function sampleUnique(pool, r) {
 
     if (!Array.isArray(pool)) {
         throw new TypeError('pool must be an array');
@@ -84,6 +84,6 @@ export function sample_unique(pool, r) {
 }
 
 export default {
-    quasi_random,
-    sample_unique
+    quasiRandom,
+    sampleUnique
 };

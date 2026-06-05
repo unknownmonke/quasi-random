@@ -29,10 +29,10 @@ App is bundled as ESM with **Vite** (see `vite.config.js`).
 *Usage :*
 
 ``` js
-import { quasi_random, sample_unique } from './src/quasi-random.js';
+import { quasiRandom, sampleUnique } from './src/quasi-random.js';
 
-const pool = quasi_random(3, 10000);
-const sample = sample_unique(pool, 10);
+const pool = quasiRandom(3, 10000);
+const sample = sampleUnique(pool, 10);
 ```
 #
 ### Setup
