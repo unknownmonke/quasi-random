@@ -1,19 +1,7 @@
 {
     "name": "quasi-random",
-    "version": "1.0.0",
-    "description": "Small JS library to generate low discrepancy quasi-random sequences in any dimension.",
+    "description": "Small Vite server to test quasi-random package.",
     "type": "module",
-    "main": "src/quasi-random.js",
-    "module": "src/quasi-random.js",
-    "files": ["src/"],
-    "keywords": ["quasi-random", "generator", "random"],
-    "author": "unknownmonke",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/unknownmonke/quasi-random.git"
-    },
-    "homepage": "https://github.com/unknownmonke/quasi-random#readme",
     "scripts": {
         "dev": "vite",
         "build": "vite build",

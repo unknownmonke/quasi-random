@@ -1,7 +1,7 @@
 'use strict';
 
 import Chart from 'chart.js/auto';
-import { quasiRandom, sampleUnique } from './src/quasi-random.js';
+import { quasiRandom, sampleUnique } from '@unknownmonke/quasi-random';
 
 const MAX_RGB = 100;
 const MAX_GRAPH = 1000;

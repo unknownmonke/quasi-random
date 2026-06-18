@@ -1,0 +1,17 @@
+{
+    "name": "@unknownmonke/quasi-random",
+    "version": "1.0.0",
+    "description": "Small JS library to generate low discrepancy quasi-random sequences in any dimension.",
+    "type": "module",
+    "main": "quasi-random.js",
+    "module": "quasi-random.js",
+    "files": ["/"],
+    "keywords": ["quasi-random", "generator", "random"],
+    "author": "unknownmonke",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/unknownmonke/quasi-random.git"
+    },
+    "homepage": "https://github.com/unknownmonke/quasi-random#readme"
+}
