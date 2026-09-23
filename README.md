@@ -62,7 +62,7 @@ const sample = sampleUnique(pool, 10);
 #
 ### Publishing
 
-- Set up **Granular Access Token (GAT)** or security key ([Doc](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages)).
+- Set up a **Granular Access Token (GAT)** or security key ([npm doc](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages)).
 
 - Add token to `.npmrc` in package root directory.
 
